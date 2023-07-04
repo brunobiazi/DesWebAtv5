@@ -26,7 +26,7 @@ import model.livro;
     		// TODO Auto-generated method stub
     		response.getWriter().append("doPOST ").append(request.getContextPath());
             dao.excluir_livros(request.getParameter("id"));
-            response.sendRedirect("http://localhost:8080/Livraria/listar_livros");
+            response.sendRedirect("http://localhost:8080/listar_livros");
     	} 
     
 }

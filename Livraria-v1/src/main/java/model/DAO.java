@@ -9,41 +9,52 @@ import java.util.ArrayList;
 
 public class DAO {
     private String driver = "com.mysql.cj.jdbc.Driver";
-    private String url = "jdbc:mysql://127.0.0.1:3306/livraria?useTimezone=true&serverTimezone=UTC";
+    private String url = "jdbc:mysql://127.0.0.1:3306/Livraria?useTimezone=true&serverTimezone=UTC";
     private String user = "root";
-    private String password = "";
-    
+    private String password = "root";
+
     private Connection conectar() {
-    	Connection con = null;
-    	
-    	try{
-    		Class.forName(driver);
-    		con = DriverManager.getConnection(url, user, password);
-    		return con;
-    	}catch(Exception e) {
-    		System.out.println(e);
-    		return null;
-    	}
-    	
+        Connection con = null;
+
+        try {
+            Class.forName(driver);
+            con = DriverManager.getConnection(url, user, password);
+            return con;
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+
     }
-    
+
+    public Connection obterConexao() {
+        Connection con = null;
+        try {
+            Class.forName(driver);
+            con = DriverManager.getConnection(url, user, password);
+            return con;
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
     public void testeConexao() {
-    	try{
-    		Connection con = conectar();
-    		System.out.println(con);
-    		con.close();
-    	}catch(Exception e) {
-    		System.out.println(e);
-    	}
+        try {
+            Connection con = conectar();
+            System.out.println(con);
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-    
-    
+
     public void inserir_livro(livro livro) {
         try {
 
-        	Connection con = conectar();
-        	
-            String sql = "INSERT INTO livro (titulo, autor, ano, preco, editora_id) VALUES (?, ?, ?, ?, ?)";
+            Connection con = conectar();
+
+            String sql = "INSERT INTO Livro (titulo, autor, ano, preco, editora_id) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1, livro.getTitulo());
             statement.setString(2, livro.getAutor());
@@ -59,78 +70,74 @@ public class DAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-	}
-    
-    
+    }
+
     public ArrayList<livro> listar_livros() {
         ArrayList<livro> livro = new ArrayList<>();
-        String sql = "SELECT * FROM livro";
-        
+        String sql = "SELECT * FROM Livro";
+
         try {
             Connection con = conectar();
             PreparedStatement statement = con.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
-            
+
             while (resultSet.next()) {
-            	int id = resultSet.getInt(1);
+                int id = resultSet.getInt(1);
                 String titulo = resultSet.getString(2);
                 String autor = resultSet.getString(3);
                 int ano = resultSet.getInt(4);
                 double preco = resultSet.getDouble(5);
                 int editora_id = resultSet.getInt(6);
-                   livro.add( new livro(id, titulo, autor, ano, preco, editora_id));
-            	
+                livro.add(new livro(id, titulo, autor, ano, preco, editora_id));
             }
-            
+
             con.close();
             return livro;
-            
-        } catch (SQLException e) {
-            System.out.println(e);
-            return null;
-        }
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("An error occurred while retrieving the book list: " + e.getMessage());
+            return new ArrayList<>(); 
+        }
     }
-    
-    
+
     public ArrayList<editora> listar_editoras() {
         ArrayList<editora> editora = new ArrayList<>();
-        String sql = "SELECT * FROM editora";
-        
+        String sql = "SELECT * FROM Editora";
+
         try {
             Connection con = conectar();
             PreparedStatement statement = con.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
-            
+
             while (resultSet.next()) {
-            	int id = resultSet.getInt(1);
+                int id = resultSet.getInt(1);
                 String cnpj = resultSet.getString(2);
                 String nome = resultSet.getString(3);
-                   editora.add( new editora(id, cnpj, nome));
-            	
+                editora.add(new editora(id, cnpj, nome));
+
             }
-            
+
             con.close();
             return editora;
-            
+
         } catch (SQLException e) {
             System.out.println(e);
             return null;
         }
 
     }
-    
-    
+
     public void excluir_livros(String id) {
 
         // Deletar os dados no banco de dados
         try {
-            
-        	Connection con = conectar();
-        	
-            String sql = "DELETE FROM livro WHERE id = " + id;
+
+            Connection con = conectar();
+
+            String sql = "DELETE FROM Livro WHERE id = " + id;
             PreparedStatement statement = con.prepareStatement(sql);
-           
+
             int linhasExcluidas = statement.executeUpdate();
             if (linhasExcluidas > 0) {
                 System.out.println("Livro excluído com sucesso");
@@ -140,56 +147,54 @@ public class DAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-	}
-    
-    
+    }
+
     public ArrayList<livro> editar_livros(String id_recebido) {
         ArrayList<livro> livro = new ArrayList<>();
-        String sql = "SELECT * FROM livro WHERE id = "+id_recebido;
-        
+        String sql = "SELECT * FROM Livro WHERE id = " + id_recebido;
+
         try {
             Connection con = conectar();
             PreparedStatement statement = con.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
-            
+
             while (resultSet.next()) {
-            	
-            	int id = resultSet.getInt(1);
+
+                int id = resultSet.getInt(1);
                 String titulo = resultSet.getString(2);
                 String autor = resultSet.getString(3);
                 int ano = resultSet.getInt(4);
                 double preco = resultSet.getDouble(5);
                 int editora_id = resultSet.getInt(6);
-                
-                if(id_recebido.equals(id+"")) {
-                	livro.add( new livro(id, titulo, autor, ano, preco, editora_id));
+
+                if (id_recebido.equals(id + "")) {
+                    livro.add(new livro(id, titulo, autor, ano, preco, editora_id));
                 }
             }
-            
+
             con.close();
             return livro;
-            
+
         } catch (SQLException e) {
             System.out.println(e);
             return null;
         }
 
     }
-    
-    
+
     public void update_livro(livro livro, String id) {
         try {
             Connection con = conectar();
 
-            String sql = "UPDATE livro SET titulo = ?, autor = ?, ano = ?, preco = ?, editora_id = ? WHERE id = ?";
+            String sql = "UPDATE Livro SET titulo = ?, autor = ?, ano = ?, preco = ?, editora_id = ? WHERE id = ?";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1, livro.getTitulo());
             statement.setString(2, livro.getAutor());
             statement.setInt(3, livro.getAno());
             statement.setDouble(4, livro.getPreco());
-            statement.setInt(5, 4); //mudar o id da editora
-            statement.setString(6, id+"");
-            
+            statement.setInt(5, 4); // mudar o id da editora
+            statement.setString(6, id + "");
+
             System.out.println(sql);
 
             int linhasAtualizadas = statement.executeUpdate();
@@ -204,6 +209,4 @@ public class DAO {
         }
     }
 
-    
 }
-

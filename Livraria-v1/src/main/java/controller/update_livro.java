@@ -41,7 +41,7 @@ public class update_livro extends HttpServlet {
 		livro.setPreco(Double.parseDouble( request.getParameter("preco")));
         
         dao.update_livro(livro, id);
-        response.sendRedirect("http://localhost:8080/Livraria/listar_livros");
+        response.sendRedirect("http://localhost:8080/listar_livros");
 	}
 
 

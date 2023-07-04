@@ -1,0 +1,13 @@
+/home/n3/Documentos/facul/DSW1/DesWebAtv5/Livraria-v1/src/main/java/model/livro.java
+/home/n3/Documentos/facul/DSW1/DesWebAtv5/Livraria-v1/src/main/java/model/editora.java
+/home/n3/Documentos/facul/DSW1/DesWebAtv5/Livraria-v1/src/main/java/model/package-info.java
+/home/n3/Documentos/facul/DSW1/DesWebAtv5/Livraria-v1/src/main/java/controller/inserir_livro.java
+/home/n3/Documentos/facul/DSW1/DesWebAtv5/Livraria-v1/src/main/java/controller/editar_livros.java
+/home/n3/Documentos/facul/DSW1/DesWebAtv5/Livraria-v1/src/main/java/model/DAO.java
+/home/n3/Documentos/facul/DSW1/DesWebAtv5/Livraria-v1/src/main/java/controller/excluir_livros.java
+/home/n3/Documentos/facul/DSW1/DesWebAtv5/Livraria-v1/src/main/java/controller/update_livro.java
+/home/n3/Documentos/facul/DSW1/DesWebAtv5/Livraria-v1/src/main/java/br/ufscar/dc/dsw/Controller.java
+/home/n3/Documentos/facul/DSW1/DesWebAtv5/Livraria-v1/src/main/java/controller/package-info.java
+/home/n3/Documentos/facul/DSW1/DesWebAtv5/Livraria-v1/src/main/java/controller/listar_editoras.java
+/home/n3/Documentos/facul/DSW1/DesWebAtv5/Livraria-v1/src/main/java/controller/listar_livros.java
+/home/n3/Documentos/facul/DSW1/DesWebAtv5/Livraria-v1/src/main/java/br/ufscar/dc/dsw/AcessaBD.java
