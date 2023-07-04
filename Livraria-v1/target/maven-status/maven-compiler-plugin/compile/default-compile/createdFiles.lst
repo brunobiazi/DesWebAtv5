@@ -1,11 +1,5 @@
-controller/update_livro.class
-controller/listar_livros.class
 br/ufscar/dc/dsw/Controller.class
 model/editora.class
-controller/listar_editoras.class
-controller/editar_livros.class
-controller/excluir_livros.class
-model/livro.class
 model/DAO.class
+controller/listar_editoras.class
 br/ufscar/dc/dsw/AcessaBD.class
-controller/inserir_livro.class

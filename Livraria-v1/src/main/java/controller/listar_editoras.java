@@ -24,7 +24,7 @@ public class listar_editoras extends HttpServlet {
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         	
-    	ArrayList<editora> lista = dao.listar_editoras();
+    	ArrayList<editora> lista = dao.listar_editora();
         request.setAttribute("listarEditoras", lista);
 
         for (int i = 0; i < lista.size(); i++){

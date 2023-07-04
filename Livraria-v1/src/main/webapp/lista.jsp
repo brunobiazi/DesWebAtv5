@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="model.livro" %>
+<%@ page import="model.cliente" %>
 <%@ page import="java.util.ArrayList" %>
 <% 
-ArrayList<livro> lista_livros = (ArrayList<livro>) request.getAttribute("listaLivros");
+ArrayList<cliente> lista_cliente = (ArrayList<cliente>) request.getAttribute("listaCliente");
 %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Listar livros</title>
+    <title>Listar clientes</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
         body {
@@ -119,27 +119,26 @@ ArrayList<livro> lista_livros = (ArrayList<livro>) request.getAttribute("listaLi
 </head>
 <body>
     <div class="container">
-        <h2>Listagem de livros</h2>
+        <h2>Listagem de clientes</h2>
         <div class="add-button">
-            <a href="cadastrar_livro.jsp" class="btn btn-primary">Cadastrar livro</a>
+            <a href="cadastrar_cliente.jsp" class="btn btn-primary">Cadastrar Cliente</a>
         </div>
-        <% if (lista_livros != null && !lista_livros.isEmpty()) { %>
+        <% if (lista_cliente != null && !lista_cliente.isEmpty()) { %>
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
-                <% for (livro livro : lista_livros) { %>
+                <% for (cliente cliente : lista_cliente) { %>
                     <div class="col mb-4">
                         <div class="task-card">
-                            <div class="price-tag">
-                                <span>R$ <%= livro.getPreco() %></span>
-                            </div>
-                            <h3><%= livro.getTitulo() %></h3>
-                            <p><%= livro.getAutor() %></p>
+                            <h3><%= cliente.getId() %></h3>
+                            <p><%= cliente.getNome() %></p>
+                            <p><%= cliente.getCpf() %></p>
+                            
                             <div class="btn-group" role="group">
-                                <form action="editar_livros" method="get">
-                                    <input type="hidden" name="id" value="<%= livro.getId() %>">
+                                <form action="editar_cliente" method="get">
+                                    <input type="hidden" name="id" value="<%= cliente.getId() %>">
                                     <button type="submit" class="btn btn-primary edit-button">Editar</button>
                                 </form>
-                                <form action="excluir_livros" method="post">
-                                    <input type="hidden" name="id" value="<%= livro.getId() %>">
+                                <form action="excluir_cliente" method="post">
+                                    <input type="hidden" name="id" value="<%= cliente.getId() %>">
                                     <button type="submit" class="btn btn-danger delete-button">Excluir</button>
                                 </form>
                             </div>
